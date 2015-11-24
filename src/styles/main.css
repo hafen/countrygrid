@@ -1,0 +1,112 @@
+html,
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+.map-background {
+  fill: white;
+}
+
+.active-country {
+  /*fill: #FFBB78;*/
+  transition: fill-opacity 0.25s;
+  stroke: #fff;
+  stroke-width: 0.5;
+  /*cursor: pointer;*/
+}
+
+.active-country:hover {
+  /*fill: #FF7F0E;*/
+  transition: fill-opacity 0.25s;
+}
+
+.country {
+  fill: #ddd;
+  transition: fill 0.25s;
+  stroke: #fff;
+  stroke-width: 0.5;
+}
+
+.country:hover {
+  fill: #ccc;
+  transition: fill 0.25s;
+}
+
+.grid-box {
+  fill: #444;
+  fill-opacity: 0.5;
+  stroke: #ccc;
+}
+
+.toggle-box {
+  fill: #fff;
+  fill-opacity: 0;
+  stroke: #444;
+  stroke-width: 1.5;
+  cursor: pointer;
+}
+
+.legend-text {
+  font-size: 13px;
+  fill: #333;
+}
+
+.legend-lbl-text {
+  font-size: 11px;
+  fill: #333;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  font-size: 9px;
+}
+
+.grid .tick {
+  stroke: lightgrey;
+  opacity: 0.7;
+}
+.grid path {
+  stroke-width: 1;
+}
+
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+
+.axis .tick line {
+  stroke: #000;
+  stroke-width: 0.5;
+  stroke-opacity: 0.25;
+}
+
+.tooltip {
+  position: absolute;
+  width: 38px;
+  margin: auto;
+  border-radius: 3px;
+  height: 36px;
+  background: #000;
+  color: white;
+  font-size: 13px;
+  padding: 3px;
+  pointer-events: none;
+}
+
+#source {
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  font-size: 14px;
+}
+
+/*.x.axis line, .x.axis path, .y.axis line, .y.axis path {
+  fill: none;
+  stroke: none;
+}
+*/
