@@ -104,6 +104,7 @@ CountryPolyD3.update = (props, selection) => {
       selection.select('path.active-country')
         .transition().duration(2000)
         .attr('transform', props.transform)
+        .style('fill', consts.colors(props.d.stuntAvg))
         .attr('d', consts.path(props.d))
         .style('stroke-width', polyStrokeWidth(props.scale, props.zoomed))
     }
@@ -131,6 +132,7 @@ CountryPolyD3.update = (props, selection) => {
       selection.select('path.active-country')
         .transition().duration(2000)
         .attr('transform', 'translate(0)scale(1)')
+        .style('fill', consts.colors(props.d.stuntAvg))
         .attr('d', gridPath)
         .style('stroke-width', 2)
     } else if(prevViewMode === 'clusterGrid') {
@@ -141,6 +143,7 @@ CountryPolyD3.update = (props, selection) => {
       selection.select('path.active-country')
         .transition().duration(2000)
         .attr('transform', 'translate(0)scale(1)')
+        .style('fill', consts.colors(props.d.stuntAvg))
         .attr('d', gridPath)
         .style('stroke-width', 2)
     }
@@ -152,7 +155,7 @@ CountryPolyD3.update = (props, selection) => {
           props.clgridcrd.gridx, props.clgridcrd.gridy)
 
         selection.select('path.active-country')
-          .transition().duration(500)
+          .transition().duration(400)
           .attr('d', gridPath)
       }
     } else {
@@ -171,16 +174,11 @@ CountryPolyD3.update = (props, selection) => {
 
         selection.select('path.active-country')
           .transition().duration(2000)
+          .style('fill', consts.clusterColors[props.clgridcrd.cl - 1])
           .attr('transform', 'translate(0)scale(1)')
           .attr('d', gridPath)
-          .style('stroke-width', 2)
+          .style('stroke-width', 4)
       }
-    // } else if(prevViewMode === 'geoGrid') {
-    //   // handle going from geoGrid to clusterGrid
-    //   selection.select('path')
-    //     .property({prevViewMode: 'clusterGrid'})
-
-      // TODO
     }
   }
 }

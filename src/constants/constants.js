@@ -13,6 +13,9 @@ var colors = d3.scale.quantize()
 var tableau10 = ['#1F77B4', '#FF7F0E', '#2CA02C', '#D62728',
   '#9467BD', '#8C564B', '#E377C2', '#7F7F7F', '#BCBD22', '#17BECF']
 
+var tableau10l = ['#A6C9E1', '#FFCC9F', '#ABD9AB', '#EFA9A9', '#D4C3E5', '#D1BCB7', '#F4C9E7', '#CCCCCC', '#E4E5A7', '#A3E5EC']
+
+
 var projection = d3.geo.mercator()
 
 var path = d3.geo.path()
@@ -23,7 +26,7 @@ var consts = {
   transformDuration: 1000,
   colors: colors,
   legendColors: legendColors,
-  clusterColors: tableau10,
+  clusterColors: tableau10l,
   projection: projection,
   path: path
 }

@@ -70,6 +70,7 @@
     "topojson": "^1.6.19",
     "material-ui": "0.13.1",
     "debounce": "1.0.0",
-    "radium": "^0.14.3"
+    "radium": "^0.14.3",
+    "color": "^0.10.1"
   }
 }

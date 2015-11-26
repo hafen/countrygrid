@@ -2,22 +2,22 @@ import d3 from 'd3'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-var GeoGridD3 = {}
-GeoGridD3.enter = (props, selection) => {
+var GeoGridPlotD3 = {}
+GeoGridPlotD3.enter = (props, selection) => {
   makeGridPlot(props, selection, 2000)
 }
 
-GeoGridD3.update = (props, selection) => {
+GeoGridPlotD3.update = (props, selection) => {
   selection.selectAll('*').remove()
   setTimeout(function() {
     makeGridPlot(props, selection, 0)
   }, 300)
 }
 
-var GeoGrid = React.createClass({
+var GeoGridPlot = React.createClass({
   componentDidMount: function() {
     this.d3Node = d3.select(ReactDOM.findDOMNode(this))
-    this.d3Node.call(GeoGridD3.enter.bind(this, this.props))
+    this.d3Node.call(GeoGridPlotD3.enter.bind(this, this.props))
   },
   shouldComponentUpdate: function(nextProps, nextState) {
     if(JSON.stringify(nextProps.grid) !== JSON.stringify(this.props.grid) ||
@@ -25,7 +25,7 @@ var GeoGrid = React.createClass({
       nextProps.gx !== this.props.gx ||
       nextProps.gy !== this.props.gy) {
 
-      this.d3Node.call(GeoGridD3.update.bind(this, nextProps))
+      this.d3Node.call(GeoGridPlotD3.update.bind(this, nextProps))
     }
     return false
   },
@@ -115,4 +115,4 @@ var makeGridPlot = (props, selection, delay) => {
     .attr('opacity', 1)
 }
 
-export default GeoGrid
+export default GeoGridPlot

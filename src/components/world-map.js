@@ -10,9 +10,9 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import CountryPolygon from './country-polygon'
 import CountryLabel from './country-label'
-import GeoGrid from './geo-grid'
+import GeoGridPlot from './geo-grid-plot'
 import GeoGridLabel from './geo-grid-label'
-import ClusterGrid from './cluster-grid'
+import ClusterGridPlot from './cluster-grid-plot'
 import Legend from './legend'
 import ToggleControl from './toggle-control'
 import consts from '../constants/constants'
@@ -127,7 +127,7 @@ var WorldMap = React.createClass({
 
     var cgp = getClusterGridProps(activeCountries)
 
-    window.countries = countries; window.cnMap = cnMap; window.activeCountries = activeCountries; window.countryInclude = countryInclude; window.bounds = bounds;
+    // window.countries = countries; window.cnMap = cnMap; window.activeCountries = activeCountries; window.countryInclude = countryInclude; window.bounds = bounds;
 
     this.setState({
       map          : countries,
@@ -249,12 +249,24 @@ var WorldMap = React.createClass({
           })}
           {this.state.map.map((d, i) => {
             if(this.state.viewMode === 'geoGrid' && d.gridx) {
-              return <GeoGrid
+              return <GeoGridPlot
                 key  = {'glplt-' + d.name}
                 name = {d.name}
                 grid = {this.state.gridProps}
                 gx   = {d.gridx}
                 gy   = {d.gridy}
+                d    = {d.stuntTime}
+              />
+            }
+          })}
+          {this.state.map.map((d, i) => {
+            if(this.state.viewMode === 'clusterGrid' && d.gridx) {
+              return <ClusterGridPlot
+                key  = {'clglplt-' + d.name}
+                name = {d.name}
+                grid = {this.state.clGridProps}
+                gx   = {this.state.clGridCoords[d.id].gridx}
+                gy   = {this.state.clGridCoords[d.id].gridy}
                 d    = {d.stuntTime}
               />
             }
@@ -283,8 +295,8 @@ var getGridProps = (xrange, yrange) => {
 }
 
 var getClusterGridProps = (activeCountries) => {
-  var hh = getHeight() - 225
-  var ww = getWidth() - 10
+  var hh = getHeight() - 125
+  var ww = getWidth() - 50
 
   // build data structure of cluster grid
   var clusters = {}
@@ -313,7 +325,8 @@ var getClusterGridProps = (activeCountries) => {
       // console.log(' ' + cidx + ' ' + curRow + ' ' + curCol)
       clusterGridCoords[activeCountries[cidx].id] = {
         gridx : curCol + 1,
-        gridy : curRow + 1
+        gridy : curRow + 1,
+        cl    : parseInt(key)
       }
       curRow++
       if(curRow >= rc.nr) {
@@ -326,9 +339,11 @@ var getClusterGridProps = (activeCountries) => {
   var grid = {}
   grid.binSize = Math.min(ww / rc.nc, hh / rc.nr)
   grid.fontStyle = {fontSize: Math.min(grid.binSize * 0.15, 12) + 'px'}
-  grid.padx = (ww + 10 - (rc.nc * grid.binSize)) / 2
+  grid.padx = (ww + 50 - (rc.nc * grid.binSize)) / 2
   grid.pady = 25
-
+  grid.nrow = rc.nr
+  grid.ncol = rc.nc
+  grid.lastnrow = rc.nr - (rc.nr * rc.nc) % nn
   return { grid : grid, clusterGridCoords : clusterGridCoords }
 }
 
